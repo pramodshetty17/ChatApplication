@@ -200,94 +200,82 @@ body{height:100%;height:100dvh;overflow:hidden;font-family:'Segoe UI',system-ui,
 #fileInput,#imgInput,#videoInput{display:none}
 
 
-.switch {
-  position: relative;
-  width: 44px;
-  height: 22px;
-  margin-right: 8px;
-}
+.switch {position: relative;  width: 44px;height: 22px;  margin-right: 8px;}
 
-.switch input {
-  display: none;
-}
+.switch input {  display: none;}
 
-.slider {
-  position: absolute;
-  cursor: pointer;
-  background: #555;
-  border-radius: 22px;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  transition: 0.3s;
-}
+.slider {position: absolute;cursor: pointer; background: #555;border-radius: 22px;top: 0;left: 0; right: 0;bottom: 0; transition: 0.3s;}
+.slider::before {content: "";position: absolute; height: 18px;width: 18px;left: 2px;bottom: 2px;background: white;border-radius: 50%;transition: 0.3s;}
+input:checked + .slider {background: #00a884;}
+input:checked + .slider::before {transform: translateX(22px);}
+body.light {--bg-deep: #f0f2f5;--bg-panel: #ffffff;--bg-input: #f6f6f6;--bg-sent: #d9fdd3;--bg-recv: #ffffff;--bg-chat: #efeae2;--border: #e0e0e0;--t1: #111b21;--t2: #667781;--tm: rgba(0,0,0,.45);--green: #00a884;--green2: #06cf9c;--blue: #53bdeb;}
+* {transition: background 0.25s, color 0.25s;}
+.location-btn {width: 40px;height: 40px; border-radius: 50%;border: none; background-color: #005c4b; color: white;font-size: 20px;cursor: pointer;box-shadow: 0 4px 8px rgba(0,0,0,0.2);transition: all 0.2s ease;}
+.location-btn:hover {background-color: #036708;transform: scale(1.1); }
+.location-btn:active { transform: scale(0.95); }
 
-.slider::before {
-  content: "";
-  position: absolute;
-  height: 18px;
-  width: 18px;
-  left: 2px;
-  bottom: 2px;
-  background: white;
-  border-radius: 50%;
-  transition: 0.3s;
-}
-
-input:checked + .slider {
-  background: #00a884;
-}
-
-input:checked + .slider::before {
-  transform: translateX(22px);
-}
-
-body.light {
-  --bg-deep: #f0f2f5;
-  --bg-panel: #ffffff;
-  --bg-input: #f6f6f6;
-
-  --bg-sent: #d9fdd3;
-  --bg-recv: #ffffff;
-  --bg-chat: #efeae2;
-
-  --border: #e0e0e0;
-
-  --t1: #111b21;
-  --t2: #667781;
-  --tm: rgba(0,0,0,.45);
-
-  --green: #00a884;
-  --green2: #06cf9c;
-  --blue: #53bdeb;
-}
-* {
-  transition: background 0.25s, color 0.25s;
-}
-.location-btn {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    border: none;
-    background-color: #005c4b; 
-    color: white;
-    font-size: 20px;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    transition: all 0.2s ease;
-}
-
-
-.location-btn:hover {
-    background-color: #036708;
-    transform: scale(1.1);
-}
-
-
-.location-btn:active {
-    transform: scale(0.95);
-}
+.profile-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;display:none;align-items:flex-start;justify-content:flex-start}
+.profile-overlay.show{display:flex;animation:ppFadeIn .2s ease}
+@keyframes ppFadeIn{from{opacity:0}to{opacity:1}}
+.profile-panel{background:var(--bg-deep);width:360px;min-width:260px;height:100%;display:flex;flex-direction:column;overflow:hidden;animation:ppSlideIn .28s cubic-bezier(.4,0,.2,1);border-right:1px solid var(--border)}
+@keyframes ppSlideIn{from{transform:translateX(-60px);opacity:0}to{transform:translateX(0);opacity:1}}
+@media(max-width:680px){.profile-panel{width:100%}}
+.pp-header{background:var(--bg-panel);padding:14px 16px;display:flex;align-items:center;gap:14px;flex-shrink:0;border-bottom:1px solid var(--border)}
+.pp-back{background:none;border:none;color:var(--t2);cursor:pointer;padding:4px;display:flex;align-items:center;justify-content:center;border-radius:50%;min-width:36px;min-height:36px}
+.pp-back:active{background:var(--bg-input)}
+.pp-title{color:var(--t1);font-size:19px;font-weight:600;flex:1}
+.pp-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.pp-body::-webkit-scrollbar{width:4px}
+.pp-body::-webkit-scrollbar-thumb{background:#374045;border-radius:4px}
+.pp-photo-section{background:var(--bg-panel);display:flex;flex-direction:column;align-items:center;padding:32px 24px 24px;position:relative}
+.pp-avatar-wrap{position:relative;width:130px;height:130px;cursor:pointer}
+.pp-avatar-large{width:130px;height:130px;border-radius:50%;background:linear-gradient(135deg,#2a3942,#374045);display:flex;align-items:center;justify-content:center;font-size:44px;font-weight:700;color:#aebac1;overflow:hidden;border:3px solid var(--bg-input);user-select:none}
+.pp-avatar-large img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.pp-avatar-camera{position:absolute;inset:0;border-radius:50%;background:rgba(0,0,0,.55);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;opacity:0;transition:opacity .2s;pointer-events:none}
+.pp-avatar-wrap:hover .pp-avatar-camera,.pp-avatar-wrap:active .pp-avatar-camera{opacity:1}
+.pp-avatar-camera span{color:#fff;font-size:11px;font-weight:500;letter-spacing:.4px}
+.pp-photo-menu{position:absolute;top:calc(50% + 24px);left:50%;transform:translateX(-50%);background:var(--bg-panel);border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,.5);min-width:210px;z-index:10;overflow:hidden;display:none}
+.pp-photo-menu.show{display:block;animation:menuPop .18s ease}
+@keyframes menuPop{from{opacity:0;transform:translateX(-50%) scale(.95)}to{opacity:1;transform:translateX(-50%) scale(1)}}
+.pp-photo-menu-item{display:flex;align-items:center;gap:14px;padding:14px 18px;cursor:pointer;color:var(--t1);font-size:14px;border-bottom:1px solid var(--border);transition:background .15s}
+.pp-photo-menu-item:last-child{border-bottom:none}
+.pp-photo-menu-item:hover,.pp-photo-menu-item:active{background:var(--bg-input)}
+.pm-icon{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.pp-name-display{margin-top:14px;font-size:24px;font-weight:600;color:var(--t1);text-align:center}
+.pp-joined{color:var(--t2);font-size:13px;margin-top:4px}
+.pp-section{background:var(--bg-panel);margin-top:8px;padding:0}
+.pp-section-label{color:var(--green);font-size:13px;font-weight:500;padding:16px 20px 6px;letter-spacing:.2px}
+.pp-field{display:flex;align-items:center;gap:14px;padding:12px 20px;border-bottom:1px solid var(--border);min-height:60px}
+.pp-field:last-child{border-bottom:none}
+.pp-field-icon{color:var(--t2);flex-shrink:0;width:22px;display:flex;justify-content:center}
+.pp-field-content{flex:1;min-width:0}
+.pp-field-label{color:var(--t2);font-size:12px;margin-bottom:2px}
+.pp-field-value{color:var(--t1);font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pp-field-input{width:100%;background:none;border:none;outline:none;color:var(--t1);font-size:15px;font-family:inherit;border-bottom:2px solid var(--green);padding-bottom:2px;display:none}
+.pp-field-input.active{display:block}
+.pp-field-value.pp-hidden{display:none}
+.pp-edit-btn{background:none;border:none;color:var(--t2);cursor:pointer;padding:6px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:color .15s}
+.pp-edit-btn:hover{color:var(--t1)}
+.pp-save-btn{background:none;border:none;color:var(--green);cursor:pointer;padding:6px;border-radius:50%;display:none;align-items:center;justify-content:center;flex-shrink:0}
+.pp-save-btn.show{display:flex}
+.pp-char-count{color:var(--t2);font-size:11px;margin-top:2px;display:none}
+.pp-char-count.show{display:block}
+.pp-field-textarea{width:100%;background:none;border:none;outline:none;color:var(--t1);font-size:15px;font-family:inherit;border-bottom:2px solid var(--green);padding-bottom:2px;resize:none;display:none;max-height:80px;overflow-y:auto;line-height:1.4}
+.pp-field-textarea.active{display:block}
+.pp-info-row{display:flex;align-items:center;gap:14px;padding:14px 20px;border-bottom:1px solid var(--border)}
+.pp-info-row:last-child{border-bottom:none}
+.pp-info-icon{color:var(--t2);flex-shrink:0;width:22px;display:flex;justify-content:center}
+.pp-info-content{flex:1;min-width:0}
+.pp-info-label{color:var(--t2);font-size:12px;margin-bottom:2px}
+.pp-info-value{color:var(--t1);font-size:15px}
+.pp-lightbox{position:fixed;inset:0;background:rgba(0,0,0,.96);z-index:2000;display:none;flex-direction:column;align-items:center;justify-content:center}
+.pp-lightbox.show{display:flex;animation:ppFadeIn .2s ease}
+.pp-lightbox-img{width:min(320px,90vw);height:min(320px,90vw);border-radius:50%;object-fit:cover;box-shadow:0 0 0 3px rgba(255,255,255,.08)}
+.pp-lightbox-initials{width:min(320px,90vw);height:min(320px,90vw);border-radius:50%;background:linear-gradient(135deg,#2a3942,#374045);display:flex;align-items:center;justify-content:center;font-size:100px;font-weight:700;color:#aebac1}
+.pp-lightbox-name{color:#fff;font-size:20px;font-weight:500;margin-top:24px}
+.pp-lightbox-close{position:absolute;top:20px;right:20px;background:rgba(255,255,255,.1);border:none;color:#fff;width:44px;height:44px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:24px}
+#ppFileInput{display:none}
+.my-avatar {background-size: cover;background-position: center;overflow: hidden;}
 </style>
 </head>
 <body>
@@ -341,7 +329,7 @@ body.light {
 
   <div class="sidebar" id="sidebar">
     <div class="sidebar-header">
-      <div class="my-avatar" id="myAvatar">?</div>
+     <div class="my-avatar" id="myAvatar" onclick="openProfile()" style="cursor:pointer">?</div>
       <div class="sidebar-title">
         <div class="sidebar-name" id="myNameLabel">Me</div>
         <div class="sidebar-sub" id="myStatus">● Active now</div>
@@ -461,6 +449,113 @@ body.light {
 
 <div class="net-toast" id="netToast"></div>
 
+<div class="profile-overlay" id="profileOverlay" onclick="handleProfileOverlayClick(event)">
+  <div class="profile-panel" id="profilePanel">
+    <div class="pp-header">
+      <button class="pp-back" onclick="closeProfile()">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M19 12H5M12 5l-7 7 7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <span class="pp-title">Profile</span>
+    </div>
+    <div class="pp-body" id="ppBody">
+      <div class="pp-photo-section" id="ppPhotoSection">
+        <div class="pp-avatar-wrap" onclick="handleAvatarClick(event)" id="ppAvatarWrap">
+          <div class="pp-avatar-large" id="ppAvatarLarge">
+            <span id="ppAvatarInitials">?</span>
+            <img id="ppAvatarImg" src="" alt="" style="display:none">
+          </div>
+          <div class="pp-avatar-camera">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="13" r="4" stroke="white" stroke-width="1.8"/></svg>
+            <span>CHANGE</span>
+          </div>
+        </div>
+        <div class="pp-photo-menu" id="ppPhotoMenu">
+          <div class="pp-photo-menu-item" onclick="ppViewPhoto()">
+            <div class="pm-icon" style="background:#374045">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" stroke="#aebac1" stroke-width="2"/><circle cx="12" cy="12" r="3" stroke="#aebac1" stroke-width="2"/></svg>
+            </div>View photo
+          </div>
+          <div class="pp-photo-menu-item" onclick="ppTriggerUpload()">
+            <div class="pm-icon" style="background:#374045">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z" stroke="#aebac1" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="13" r="4" stroke="#aebac1" stroke-width="1.8"/></svg>
+            </div>Upload photo
+          </div>
+          <div class="pp-photo-menu-item" onclick="ppRemovePhoto()" id="ppRemovePhotoItem" style="display:none">
+            <div class="pm-icon" style="background:#2d1a1e">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><polyline points="3 6 5 6 21 6" stroke="#f15c6d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M19 6l-1 14H6L5 6" stroke="#f15c6d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 11v6M14 11v6" stroke="#f15c6d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <span style="color:var(--red)">Remove photo</span>
+          </div>
+        </div>
+        <div class="pp-name-display" id="ppNameDisplay"></div>
+        <div class="pp-joined" id="ppJoined">Member since today</div>
+      </div>
+
+      <div class="pp-section">
+        <div class="pp-section-label">Your name</div>
+        <div class="pp-field">
+          <div class="pp-field-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="1.8"/></svg></div>
+          <div class="pp-field-content">
+            <div class="pp-field-label">This name is visible to your contacts</div>
+            <div class="pp-field-value" id="ppNameValue"></div>
+            <input class="pp-field-input" id="ppNameInput" maxlength="25" placeholder="Enter your name"
+              oninput="ppUpdateNameCount()" onkeydown="if(event.key==='Enter')ppSaveName()">
+            <div class="pp-char-count" id="ppNameCount">0 / 25</div>
+          </div>
+          <button class="pp-edit-btn" id="ppNameEditBtn" onclick="ppStartEditName()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <button class="pp-save-btn" id="ppNameSaveBtn" onclick="ppSaveName()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </div>
+      </div>
+
+      <div class="pp-section">
+        <div class="pp-section-label">About</div>
+        <div class="pp-field">
+          <div class="pp-field-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.8"/><line x1="12" y1="8" x2="12" y2="12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><line x1="12" y1="16" x2="12.01" y2="16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+          <div class="pp-field-content">
+            <div class="pp-field-label">About</div>
+            <div class="pp-field-value" id="ppAboutValue">Hey there! I am using ChatApp</div>
+            <textarea class="pp-field-textarea" id="ppAboutInput" maxlength="139" rows="2"
+              placeholder="Write something about yourself…"
+              oninput="ppUpdateAboutCount()" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();ppSaveAbout()}"></textarea>
+            <div class="pp-char-count" id="ppAboutCount">0 / 139</div>
+          </div>
+          <button class="pp-edit-btn" id="ppAboutEditBtn" onclick="ppStartEditAbout()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <button class="pp-save-btn" id="ppAboutSaveBtn" onclick="ppSaveAbout()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </div>
+      </div>
+
+      <div class="pp-section" style="margin-bottom:8px">
+        <div class="pp-section-label">Info</div>
+        <div class="pp-info-row">
+          <div class="pp-info-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="5" y="2" width="14" height="20" rx="2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><line x1="12" y1="18" x2="12.01" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+          <div class="pp-info-content">
+            <div class="pp-info-label">Status</div>
+            <div class="pp-info-value" style="color:var(--green)">● Online</div>
+          </div>
+        </div>
+        <div class="pp-info-row">
+          <div class="pp-info-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.8"/><polyline points="12 6 12 12 16 14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="pp-info-content">
+            <div class="pp-info-label">Member since</div>
+            <div class="pp-info-value" id="ppMemberSince">—</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="pp-lightbox" id="ppLightbox" onclick="ppCloseLightbox()">
+  <button class="pp-lightbox-close" onclick="ppCloseLightbox()">×</button>
+  <img class="pp-lightbox-img" id="ppLightboxImg" src="" alt="" style="display:none" onclick="event.stopPropagation()">
+  <div class="pp-lightbox-initials" id="ppLightboxInitials" style="display:none" onclick="event.stopPropagation()"></div>
+  <div class="pp-lightbox-name" id="ppLightboxName"></div>
+</div>
+
+<input type="file" id="ppFileInput" accept="image/*" onchange="ppHandlePhotoSelect(this)">
+
+
 <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/stompjs/lib/stomp.min.js"></script>
 <script>
@@ -492,7 +587,6 @@ function toast(msg,dur=3000){
 }
 
 
-
 function updateNet() {
   isOnline = navigator.onLine;
   const banner = document.getElementById('offlineBanner');
@@ -503,11 +597,10 @@ function updateNet() {
     toast('⚠ You are offline', 6000);
   } else {
     banner.classList.remove('show');
-    setMyStatus('connecting');          
     toast('✓ Back online', 2500);
-    if (sender && receiver) {
+    if (sender) {
       if (stomp && stomp.connected) stomp.disconnect();
-      connect();
+      _connectEager();
     }
   }
 }
@@ -516,16 +609,15 @@ function setMyStatus(state) {
   const sub = document.getElementById('myStatus');
   if (!sub) return;
   const map = {
-    online:     { text: '● Active now',   color: '#25d366' },
-    connecting: { text: '● Connecting…',  color: '#f0c040' },
-    offline:    { text: '● Offline',      color: '#f15c6d' },
+    online:     { text: '● Active now',  color: '#25d366' },
+    connecting: { text: '● Connecting…', color: '#f0c040' },
+    offline:    { text: '● Offline',     color: '#f15c6d' },
   };
   const s = map[state] || map.online;
   sub.textContent = s.text;
   sub.style.color  = s.color;
 }
-window.addEventListener('online',updateNet);
-window.addEventListener('offline',updateNet);
+
 
 
 function startApp(){
@@ -535,27 +627,28 @@ function startApp(){
   myName=name;
   fetch(BASE+'/api/users/register',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:myName})})
   .then(r=>{if(!r.ok)throw new Error('HTTP '+r.status);return r.json();})
-  .then(u=>{sender=u.id;showApp();})
+  .then(u=>{sender=u.id;showApp();_connectEager();})
   .catch(()=>{sender='tmp_'+Date.now();showApp();toast('⚠ Could not reach server',5000);});
 }
 
-function showApp(){
-  document.getElementById('modal').style.display='none';
-  document.getElementById('mainApp').style.display='flex';
-  document.getElementById('myAvatar').textContent=gi(myName);
-  document.getElementById('myNameLabel').textContent=myName;
-  updateNet();
-  loadMyContacts();
- 
+function showApp() {
+  document.getElementById('modal').style.display   = 'none';
+  document.getElementById('mainApp').style.display = 'flex';
+  document.getElementById('myAvatar').textContent  = gi(myName);
+  document.getElementById('myNameLabel').textContent = myName;
 
-  (function(){
-  const saved = localStorage.getItem("theme");
-  if(saved === "light"){
-    document.body.classList.add("light");
-    const t = document.getElementById("themeToggle");
-    if(t) t.checked = true;
+  
+  document.getElementById('myStatus').textContent = '';
+
+  const saved = localStorage.getItem('theme');
+  if (saved === 'light') {
+    document.body.classList.add('light');
+    const t = document.getElementById('themeToggle');
+    if (t) t.checked = true;
   }
-})();
+
+  loadMyContacts();
+  loadMyProfile();
 }
 
 
@@ -566,6 +659,7 @@ function loadMyContacts(){
   }catch(e){ myContacts=[]; }
   renderContacts(myContacts);
   refreshOnlineStatus();
+  
   
 }
 
@@ -593,26 +687,36 @@ function renderContacts(list){
       </div>`;
     return;
   }
-  list.forEach(u=>{
-    const el=document.createElement('div');
-    el.className='user-item'; el.id='item-'+u.id;
-    el.innerHTML=`
-      <div class="avatar-wrap">
-        <div class="avatar" style="background:#1f2c33;color:#8696a0">${gi(u.name)}</div>
-        <div class="status-dot" id="dot-${u.id}"></div>
-      </div>
-      <div class="user-info">
-        <div class="uname">${esc(u.name)}</div>
-        <div class="uprev" id="prev-${u.id}">Tap to chat</div>
-      </div>
-      <div class="utime" id="time-${u.id}"></div>`;
-    el.onclick=()=>{
-      if(activeItem)activeItem.classList.remove('active');
-      el.classList.add('active'); activeItem=el; openChat(u);
-    };
-    div.appendChild(el);
-  });
-  refreshOnlineStatus();
+  list.forEach(u => {
+  const el = document.createElement('div');
+  el.className = 'user-item';
+  el.id = 'item-' + u.id;
+
+  el.innerHTML = `
+    <div class="avatar-wrap">
+      <div class="avatar" id="avatar-${u.id}"></div>
+      <div class="status-dot" id="dot-${u.id}"></div>
+    </div>
+    <div class="user-info">
+      <div class="uname">${esc(u.name)}</div>
+      <div class="uprev" id="prev-${u.id}">Tap to chat</div>
+    </div>
+    <div class="utime" id="time-${u.id}"></div>
+  `;
+
+  div.appendChild(el);
+
+ 
+  const avatarEl = document.getElementById('avatar-' + u.id);
+  loadUserProfile(u.id, avatarEl, u.name);
+
+  el.onclick = () => {
+    if (activeItem) activeItem.classList.remove('active');
+    el.classList.add('active');
+    activeItem = el;
+    openChat(u);
+  };
+});
 }
 
 
@@ -727,39 +831,50 @@ function openChat(u) {
   cancelUpload();
 
   
-  document.getElementById('chatStatus').textContent = '…';
+ const dot  = document.getElementById('dot-' + u.id);
+  const isOnl = dot && dot.classList.contains('online');
+  document.getElementById('chatStatus').textContent = isOnl ? 'online' : 'offline';
 
   if (window.innerWidth <= 680) document.getElementById('sidebar').classList.add('hidden');
-  if (stomp && stomp.connected) stomp.disconnect();
-  connect();                          
-}
 
-function goBack(){
+  if (stomp && stomp.connected) {
+    loadHistory();            
+  } else {
+    _connectEager();          
+  }
+}                          
+
+
+function goBack() {
   document.getElementById('sidebar').classList.remove('hidden');
-  document.getElementById('activeChat').style.display='none';
-  document.getElementById('emptyState').style.display='flex';
-  if(stomp&&stomp.connected) stomp.disconnect();
-  receiver=null;
-  if(activeItem){activeItem.classList.remove('active');activeItem=null;}
+  document.getElementById('activeChat').style.display = 'none';
+  document.getElementById('emptyState').style.display = 'flex';
+  receiver = null;  
+  if (activeItem) { activeItem.classList.remove('active'); activeItem = null; }
 }
 
+function _connectEager() {
+  if (!isOnline) { setMyStatus('offline'); return; }
+  if (stomp && stomp.connected) { setMyStatus('online'); return; }
 
+  
+  const connectingTimer = setTimeout(() => setMyStatus('connecting'), 400);
 
+  const sock = new SockJS(BASE + '/chat?userId=' + sender, null, {
+    transports: ['websocket'],          
+    timeout: 5000
+  });
 
-
-function connect() {
-  if (!isOnline) return;
-
-  const sock = new SockJS(BASE + '/chat?userId=' + sender);
   stomp = Stomp.over(sock);
   stomp.debug = null;
+  stomp.heartbeat.outgoing = 10000;    
+  stomp.heartbeat.incoming = 10000;
 
   stomp.connect({}, () => {
+    clearTimeout(connectingTimer);      
+    setMyStatus('online');             
 
-    
-    setMyStatus('online');
-
-    stomp.send("/app/addUser", {}, JSON.stringify({
+    stomp.send('/app/addUser', {}, JSON.stringify({
       senderId: Number(sender),
       senderName: myName
     }));
@@ -773,7 +888,6 @@ function connect() {
       const dot = document.getElementById('dot-' + uid);
       if (dot) dot.className = 'status-dot ' + (isOnl ? 'online' : 'offline-d');
 
-    
       if (uid === String(receiver)) {
         document.getElementById('chatStatus').textContent = isOnl ? 'online' : 'offline';
       }
@@ -782,11 +896,9 @@ function connect() {
     
     stomp.subscribe('/user/queue/messages', m => {
       const msg = JSON.parse(m.body);
-
       const isCurrentChat =
         String(msg.senderId) === String(receiver) ||
         String(msg.receiverId) === String(receiver);
-
       const isFromOtherUser = String(msg.senderId) !== String(sender);
 
       if (msg.type === 'LOCATION') {
@@ -828,7 +940,7 @@ function connect() {
     stomp.subscribe('/user/queue/typing', m => {
       const txt = document.getElementById('typingTxt');
       const st  = document.getElementById('chatStatus');
-      txt.textContent = 'typing...';
+      txt.textContent   = 'typing...';
       txt.style.display = 'block';
       st.style.display  = 'none';
       clearTimeout(typingTimeout);
@@ -838,19 +950,16 @@ function connect() {
       }, 2500);
     });
 
-    
-    refreshOnlineStatus();
-    loadHistory();
+    if (receiver) loadHistory();
 
   }, err => {
-    console.log("WebSocket error:", err);
+    clearTimeout(connectingTimer);
     setMyStatus('connecting');
-    setTimeout(() => {
-      if (isOnline && receiver) connect();
-    }, 3000);
+    console.log('WebSocket error:', err);
+    
+    setTimeout(() => { if (isOnline) _connectEager(); }, 3000);
   });
 }
-
 
 
 window.addEventListener("beforeunload", () => {
@@ -1111,6 +1220,288 @@ function sendCurrentLocation() {
 }
 
 
+let ppPhoto = null;
+let ppAbout = 'Hey there! I am using ChatApp';
+let ppMenuOpen = false;
+
+function loadMyProfile() {
+  if (!sender) return;
+  fetch(`${BASE}/api/users/${sender}`)
+    .then(r => r.json())
+    .then(user => {
+      // Restore about
+      if (user.about) {
+        ppAbout = user.about;
+      }
+      // Restore photo
+      if (user.profilePhoto) {
+        ppPhoto = user.profilePhoto;
+        applyPhotoToSidebarAvatar();
+      }
+    })
+    .catch(() => {}); 
+}
+
+function loadUserProfile(userId, avatarElement, name) {
+  fetch(`${BASE}/api/users/${userId}`)
+    .then(r => r.json())
+    .then(user => {
+      if (user.profilePhoto) {
+        avatarElement.style.backgroundImage = `url(${user.profilePhoto})`;
+        avatarElement.style.backgroundSize = 'cover';
+        avatarElement.style.backgroundPosition = 'center';
+        avatarElement.textContent = '';
+      } else {
+        avatarElement.style.backgroundImage = '';
+        avatarElement.textContent = gi(name);
+      }
+    })
+    .catch(() => {
+      avatarElement.textContent = gi(name);
+    });
+}
+
+function applyPhotoToSidebarAvatar() {
+  const myAv = document.getElementById('myAvatar');
+  if (ppPhoto) {
+    myAv.style.backgroundImage = `url(${ppPhoto})`;
+    myAv.style.backgroundSize  = 'cover';
+    myAv.style.backgroundPosition = 'center';
+    myAv.textContent = '';
+  } else {
+    myAv.style.backgroundImage = '';
+    myAv.textContent = gi(myName);
+  }
+}
+
+function openProfile() {
+  document.getElementById('profileOverlay').classList.add('show');
+  document.getElementById('ppAvatarInitials').textContent = gi(myName);
+  document.getElementById('ppNameDisplay').textContent    = myName;
+  document.getElementById('ppNameValue').textContent      = myName;
+  document.getElementById('ppAboutValue').textContent     = ppAbout;
+  document.getElementById('ppMemberSince').textContent    =
+    new Date().toLocaleDateString([], { month: 'long', year: 'numeric' });
+  ppSyncPhoto();
+  ppCancelEditName();
+  ppCancelEditAbout();
+}
+
+function closeProfile() {
+  document.getElementById('profileOverlay').classList.remove('show');
+  ppCloseMenu();
+}
+
+function handleProfileOverlayClick(e) {
+  if (e.target === document.getElementById('profileOverlay')) closeProfile();
+}
+
+function ppSyncPhoto() {
+  const img    = document.getElementById('ppAvatarImg');
+  const init   = document.getElementById('ppAvatarInitials');
+  const remove = document.getElementById('ppRemovePhotoItem');
+
+  if (ppPhoto) {
+    img.src = ppPhoto;
+    img.style.display  = 'block';
+    init.style.display = 'none';
+    remove.style.display = 'flex';
+  } else {
+    img.style.display  = 'none';
+    init.textContent   = gi(myName);
+    init.style.display = 'block';
+    remove.style.display = 'none';
+  }
+  applyPhotoToSidebarAvatar();
+}
+
+function handleAvatarClick(e) {
+  e.stopPropagation();
+  const menu = document.getElementById('ppPhotoMenu');
+  if (ppMenuOpen) { ppCloseMenu(); return; }
+  menu.classList.add('show'); ppMenuOpen = true;
+  setTimeout(() => document.addEventListener('click', ppCloseMenuOut, { once: true }), 0);
+}
+
+function ppCloseMenu() {
+  document.getElementById('ppPhotoMenu').classList.remove('show');
+  ppMenuOpen = false;
+}
+
+function ppCloseMenuOut(e) {
+  if (!document.getElementById('ppAvatarWrap').contains(e.target)) ppCloseMenu();
+}
+
+function ppViewPhoto() {
+  ppCloseMenu();
+  const lbImg  = document.getElementById('ppLightboxImg');
+  const lbInit = document.getElementById('ppLightboxInitials');
+  document.getElementById('ppLightboxName').textContent = myName;
+  if (ppPhoto) {
+    lbImg.src = ppPhoto; lbImg.style.display = 'block';
+    lbInit.style.display = 'none';
+  } else {
+    lbImg.style.display = 'none';
+    lbInit.style.display = 'flex';
+    lbInit.textContent = gi(myName);
+  }
+  document.getElementById('ppLightbox').classList.add('show');
+}
+
+function ppCloseLightbox() {
+  document.getElementById('ppLightbox').classList.remove('show');
+}
+
+function ppTriggerUpload() {
+  ppCloseMenu();
+  document.getElementById('ppFileInput').click();
+}
+
+function ppHandlePhotoSelect(input) {
+  const file = input.files[0];
+  if (!file) return;
+
+  if (file.size > 5 * 1024 * 1024) {
+    toast('Image must be under 5 MB');
+    return;
+  }
+
+  
+  toast('Saving photo…', 60000);
+
+  const reader = new FileReader();
+  reader.onload = e => {
+    ppPhoto = e.target.result;   
+    ppSyncPhoto();               
+
+    
+    fetch(`${BASE}/api/users/${sender}/photo`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ photo: ppPhoto })
+    })
+    .then(r => { if (!r.ok) throw new Error(); return r.json(); })
+    .then(() => toast('✓ Profile photo saved'))
+    .catch(() => {
+      
+      try { localStorage.setItem('pp_photo_' + sender, ppPhoto); } catch(e) {}
+      toast('✓ Photo saved locally');
+    });
+  };
+  reader.readAsDataURL(file);
+  input.value = '';
+}
+
+
+function ppRemovePhoto() {
+  ppCloseMenu();
+  ppPhoto = null;
+  ppSyncPhoto();
+
+  fetch(`${BASE}/api/users/${sender}/photo`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ photo: null })
+  })
+  .then(r => { if (!r.ok) throw new Error(); })
+  .then(() => toast('Profile photo removed'))
+  .catch(() => {
+    try { localStorage.removeItem('pp_photo_' + sender); } catch(e) {}
+    toast('Profile photo removed');
+  });
+}
+
+
+
+function ppStartEditName() {
+  document.getElementById('ppNameValue').classList.add('pp-hidden');
+  document.getElementById('ppNameInput').classList.add('active');
+  document.getElementById('ppNameSaveBtn').classList.add('show');
+  document.getElementById('ppNameCount').classList.add('show');
+  document.getElementById('ppNameEditBtn').style.display = 'none';
+  document.getElementById('ppNameInput').value = myName;
+  ppUpdateNameCount();
+  document.getElementById('ppNameInput').focus();
+  document.getElementById('ppNameInput').select();
+}
+
+function ppCancelEditName() {
+  document.getElementById('ppNameValue').classList.remove('pp-hidden');
+  document.getElementById('ppNameInput').classList.remove('active');
+  document.getElementById('ppNameSaveBtn').classList.remove('show');
+  document.getElementById('ppNameCount').classList.remove('show');
+  document.getElementById('ppNameEditBtn').style.display = 'flex';
+}
+
+function ppSaveName() {
+  const newName = document.getElementById('ppNameInput').value.trim();
+  if (!newName) { toast('Name cannot be empty'); return; }
+
+  fetch(`${BASE}/api/users/${sender}/profile`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name: newName })
+  })
+  .then(r => { if (!r.ok) throw new Error(); return r.json(); })
+  .then(() => {
+    myName = newName;
+    document.getElementById('ppNameValue').textContent   = myName;
+    document.getElementById('ppNameDisplay').textContent = myName;
+    document.getElementById('myNameLabel').textContent   = myName;
+    applyPhotoToSidebarAvatar();
+    ppCancelEditName();
+    toast('✓ Name saved');
+  })
+  .catch(() => toast('⚠ Could not save name'));
+}
+
+function ppUpdateNameCount() {
+  document.getElementById('ppNameCount').textContent =
+    document.getElementById('ppNameInput').value.length + ' / 25';
+}
+
+function ppStartEditAbout() {
+  document.getElementById('ppAboutValue').classList.add('pp-hidden');
+  document.getElementById('ppAboutInput').classList.add('active');
+  document.getElementById('ppAboutSaveBtn').classList.add('show');
+  document.getElementById('ppAboutCount').classList.add('show');
+  document.getElementById('ppAboutEditBtn').style.display = 'none';
+  document.getElementById('ppAboutInput').value = ppAbout;
+  ppUpdateAboutCount();
+  document.getElementById('ppAboutInput').focus();
+}
+
+function ppCancelEditAbout() {
+  document.getElementById('ppAboutValue').classList.remove('pp-hidden');
+  document.getElementById('ppAboutInput').classList.remove('active');
+  document.getElementById('ppAboutSaveBtn').classList.remove('show');
+  document.getElementById('ppAboutCount').classList.remove('show');
+  document.getElementById('ppAboutEditBtn').style.display = 'flex';
+}
+
+function ppSaveAbout() {
+  const newAbout = document.getElementById('ppAboutInput').value.trim()
+                   || 'Hey there! I am using ChatApp';
+
+  fetch(`${BASE}/api/users/${sender}/profile`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ about: newAbout })
+  })
+  .then(r => { if (!r.ok) throw new Error(); return r.json(); })
+  .then(() => {
+    ppAbout = newAbout;
+    document.getElementById('ppAboutValue').textContent = ppAbout;
+    ppCancelEditAbout();
+    toast('✓ About saved');
+  })
+  .catch(() => toast('⚠ Could not save about'));
+}
+
+function ppUpdateAboutCount() {
+  document.getElementById('ppAboutCount').textContent =
+    document.getElementById('ppAboutInput').value.length + ' / 139';
+}
 
 
 </script>

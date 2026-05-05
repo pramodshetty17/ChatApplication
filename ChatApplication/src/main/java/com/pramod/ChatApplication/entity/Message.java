@@ -29,6 +29,10 @@ public class Message {
     private Double latitude;
     private Double longitude;
 
+    private String senderPhoto;
+
+    
+
     @Column(updatable = false)
     private LocalDateTime timestamp;
 
@@ -84,5 +88,10 @@ public class Message {
     public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
+
+    public String getSenderPhoto() {
+        return senderPhoto;
+    }
+    
 }
 
